@@ -1,4 +1,7 @@
 !start.
 
 +!start 
-   <- .send(alice, tell, hello).
+   <- .send(alice, signal, hello);
+      //.wait(3000);
+      .send(alice, signal, hello);
+   .

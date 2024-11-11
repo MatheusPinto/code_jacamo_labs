@@ -1,11 +1,6 @@
-// Task 3: Improve the implementation
-
-// Exercise 5
-
-preference(20). 
+preference(20).
 
 !start.
-
 +!start <- !keep_temperature.
 
 +!keep_temperature
@@ -15,22 +10,17 @@ preference(20).
    :  preference(P) & temperature(C) & C < P
    <- startHeating; !wait_until(P); !keep_temperature.
 +!keep_temperature
-  <- !keep_temperature.
+   <- !keep_temperature.
 
+// A solução é ...
+// 
 +!wait_until(T) : temperature(T) <- stopAirConditioner.
-+!wait_until(T) <- !wait_until(T).
++!wait_until(T) 
+    <- .wait(3000); // wait 3 seconds
+       !wait_until(T).
 
-!show_hvac_state.
-
-+!show_hvac_state
-   : state(S) & S = "cooling"
-   <- .println("so cool"); .wait(250); !show_hvac_state.
-+!show_hvac_state
-   : state(S) & S = "heating"
-   <- .println("so hot"); .wait(250); !show_hvac_state.
-+!show_hvac_state
-   <- !show_hvac_state.
-
++state("cooling") <- println("so cool").
++state("heating") <- println("so hot").
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
